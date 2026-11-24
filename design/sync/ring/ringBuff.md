@@ -10,27 +10,28 @@ opportunistic access. Its design is based on the slot in a Vyukov-esque MPMC que
 ```mermaid
 classDiagram
     class SlotHoldable~T~ {
-        &lt;&lt;concept&gt;&gt;
-        +std::is_nothrow_move_constructible_v~T~;
-        +std::is_nothrow_move_assignable_v~T~;
+        <<concept>>
+        +std::is_nothrow_move_constructible_v~T~
+        +std::is_nothrow_move_assignable_v~T~
         +std::is_nothrow_destructible_v~T~
     } 
 
     class Slot~SlotHoldable T~ {
         -std::atomic_u64 sequence_
-        -std::array&lt;std::bytes, sizeof&lpar;T&rpar;&gt; data_
+        -std::array~std::byte, sizeof(T)~ data_
         -purge() noexcept void
-        -castBuff() noexcept T&ast;
+        -castBuff() noexcept T*
     }
 
     class UsableBuffSize~N~ {
-        + std::same_as&lt;decltype&lpar;N&rpar;, std::size_t&gt;
-        + N &gt;= 2
-        + N & &lpar;N-1&rpar; == 0
+        <<concept>>
+        +std::same_as~decltype(N), std::size_t~
+        +"N >= 2"
+        +"(N & (N - 1)) == 0"
     }
 
     class MpMcRing~SlotHoldable T, UsableBuffSize N~ {
-        -std::array&lt;Slot&lt;T&gt;, N&gt; slots_
+        -std::array~Slot~T~, N~ slots_
         -std::atomic_uint64 tail_
         -std::atomic_uint64 head_
         +tryPush(T&& input) noexcept bool
