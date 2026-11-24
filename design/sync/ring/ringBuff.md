@@ -63,7 +63,7 @@ Hence, $2^m + v = 2^m \lor v, 0 \leq v \lt 2^m, v \in \mathbb{N}$.
 
 And, $(2^m + p) \land (2^m + (p-1)) = (2^m \lor p) \land (2^m \lor (p - 1)) = 2^m \lor (p \land (p - 1))$.
 
-This would finally yeild $n \land (n-1) = 2^m \lor (p \land (p-1)) = 0$; however, $2^m$ and $p \land (p-1)$ are disjoint, creating a contradiction.
+This would finally yield $n \land (n-1) = 2^m \lor (p \land (p-1)) = 0$; however, $2^m$ and $p \land (p-1)$ are disjoint, creating a contradiction.
 Hence, $n = 2^m.$
 
 $\square$
