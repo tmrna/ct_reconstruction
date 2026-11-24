@@ -20,7 +20,7 @@ classDiagram
         -std::atomic_u64 sequence_
         -std::array&lt;std::bytes, sizeof&lpar;T&rpar;&gt; data_
         -purge() noexcept void
-        -castBuff() noexcept T*
+        -castBuff() noexcept T&ast;
     }
 
     class UsableBuffSize~N~ {
